@@ -1,22 +1,21 @@
-.skills-container { 
+.skills-container {
   width: 100%;
   min-height: 100vh;
-  background-color: #FAF1E6; /* Soft cream background */
+  background-color: #FAF1E6;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 6rem 2rem 4rem; /* 6rem top padding for navbar + visual spacing */
+  padding: 6rem 1rem 3rem; /* Top padding for fixed navbar */
   overflow: hidden;
-  color: #333; /* Professional dark grey text */
+  color: #333;
   box-sizing: border-box;
 }
 
-
 .skills-title {
-  font-size: 5rem;
+  font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 700;
-  color: #333333a6; /* Dark grey for the heading */
+  color: #333333a6;
   animation: fadeOut 2s forwards;
   margin-bottom: 2rem;
   font-family: 'Georgia', serif;
@@ -28,13 +27,33 @@
   100% { opacity: 0; transform: scale(0.9); }
 }
 
+.all-skills-row {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.skills-section {
+  width: 100%;
+}
+
+.skills-heading {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  color: #444;
+}
+
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 1.5rem;
   width: 100%;
-  padding: 1rem 2rem;
   opacity: 0;
   animation: fadeInIcons 1.5s ease forwards;
   box-sizing: border-box;
@@ -49,22 +68,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   transition: transform 0.3s ease;
-  color: #444; /* Slightly softer than pure black for text */
+  color: #444;
   cursor: default;
   user-select: none;
 }
 
 .skill-item:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .skill-item p {
-  margin-top: 0.5rem;
-  font-size: 1rem;
+  margin-top: 0.4rem;
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
   font-weight: 500;
-  color: #555; /* Balanced readability */
+  color: #555;
   font-family: 'Georgia', serif;
   text-align: center;
   user-select: none;
+}
+
+/* Icon responsiveness */
+.skill-item svg {
+  width: clamp(40px, 6vw, 60px);
+  height: clamp(40px, 6vw, 60px);
 }

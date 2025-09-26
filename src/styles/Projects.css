@@ -1,25 +1,40 @@
-/* === Container === */
 .projects-container {
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   min-height: 100vh;
-  background-color: #2B0B2E; /* dark purple bg */
+  background-color: #2B0B2E;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6rem 2rem 4rem; /* Top padding for fixed navbar */
-  color: #F9F5E3; /* pale warm text */
+  padding: 6rem 2rem 4rem;
+  color: #F9F5E3;
   overflow: hidden;
   box-sizing: border-box;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .projects-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
 /* === Section Title === */
 .projects-title {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
-  margin-bottom: 3rem;
-  margin-top: 2rem;
+  margin: 2rem 0 3rem;
   letter-spacing: 1px;
-  color: #4B352A; /* warm gold */
+  color: #4B352A;
   opacity: 0;
   animation: popIn 0.8s ease-out forwards;
 }
@@ -34,7 +49,6 @@
     transform: scale(1) translateY(0);
   }
 }
-
 
 /* === Grid Layout === */
 .projects-grid {
@@ -70,15 +84,14 @@
 
 /* === Card Content === */
 .project-card h2 {
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   color: #CA7842;
-  margin-bottom: 0.5rem;
-  margin-top: 1rem;
+  margin: 1rem 0 0.5rem;
   text-align: center;
 }
 
 .project-card p {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.3vw, 1rem);
   color: #4B352A;
   text-align: center;
   padding: 0 1rem;
@@ -89,7 +102,7 @@
 .thumbnail-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/6; /* shorter */
+  aspect-ratio: 16 / 6; /* wide thumbnails */
   overflow: hidden;
 }
 
@@ -132,8 +145,7 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   flex-wrap: wrap;
 }
 
@@ -145,6 +157,8 @@
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
+  font-size: 1rem;
 }
 
 .project-buttons .btn:hover {
@@ -192,9 +206,73 @@
   color: #444;
 }
 
+.modal-close:focus {
+  outline: 2px dashed #CA7842;
+  outline-offset: 3px;
+}
+
 .modal-content iframe {
   width: 100%;
-  height: 400px;
+  height: min(400px, 50vh);
   border: none;
   border-radius: 8px;
+}
+
+/* =================== */
+/* Responsive Breakpoints */
+/* =================== */
+
+@media (max-width: 992px) {
+  .projects-title {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-container {
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .projects-title {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 2rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 600px;
+  }
+
+  .thumbnail-container {
+    aspect-ratio: 16 / 9;
+  }
+
+  .modal-content iframe {
+    height: min(250px, 45vh);
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-container {
+    padding: 4rem 1rem 2rem;
+  }
+
+  .projects-title {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .thumbnail-container {
+    aspect-ratio: 4 / 3;
+  }
+
+  .modal-content iframe {
+    height: min(200px, 45vh);
+  }
+
+  .project-buttons .btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
 }

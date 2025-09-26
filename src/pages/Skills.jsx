@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import '../styles/Skills.css';
 import {
   FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaPython, FaGitAlt, FaCode,
-FaCogs, FaKey} from 'react-icons/fa';
+  FaCogs, FaKey
+} from 'react-icons/fa';
 import {
   SiExpress, SiMongodb, SiPostman, SiCanva, SiVercel,
-  SiNumpy, SiPandas, SiScikitlearn, SiSpacy, SiRedux, SiMongoose
+  SiNumpy, SiPandas, SiScikitlearn, SiSpacy, SiRedux, SiMongoose, SiJupyter
 } from 'react-icons/si';
 
 const Skills = () => {
@@ -30,27 +31,17 @@ const Skills = () => {
         { icon: <FaJsSquare size={60} color="#F7DF1E" />, label: 'JavaScript (ES6+)' },
       ],
     },
-   {
-  heading: 'Web Development',
-  skills: [
-    // 🌐 Core Web
-    { icon: <FaHtml5 size={60} color="#E34F26" />, label: 'HTML5' },
-    { icon: <FaCss3Alt size={60} color="#1572B6" />, label: 'CSS3' },
-
-    // ⚙️ MERN Stack
-    { icon: <FaReact size={60} color="#61DAFB" />, label: 'React.js' },
-    { icon: <FaNodeJs size={60} color="#339933" />, label: 'Node.js' },
-    { icon: <SiExpress size={60} color="#000000" />, label: 'Express.js' },
-    { icon: <SiMongodb size={60} color="#47A248" />, label: 'MongoDB' },
-
-    // 🧠 Advanced & Related
-    { icon: <FaCogs size={60} color="#6D6D6D" />, label: 'RESTful APIs' },
-    { icon: <FaKey size={60} color="#F4A261" />, label: 'JWT Authentication' },
-    { icon: <SiRedux size={60} color="#764ABC" />, label: 'Redux / Context API' },
-    { icon: <SiMongoose size={60} color="#800000" />, label: 'Mongoose ODM' },
-  ],
-},
-
+    {
+      heading: 'Web Development',
+      skills: [
+        { icon: <FaHtml5 size={60} color="#E34F26" />, label: 'HTML5' },
+        { icon: <FaCss3Alt size={60} color="#1572B6" />, label: 'CSS3' },
+        { icon: <FaReact size={60} color="#61DAFB" />, label: 'React.js' },
+        { icon: <FaNodeJs size={60} color="#339933" />, label: 'Node.js' },
+        { icon: <SiExpress size={60} color="#000000" />, label: 'Express.js' },
+        { icon: <SiMongodb size={60} color="#47A248" />, label: 'MongoDB' },
+      ],
+    },
     {
       heading: 'Machine Learning / NLP',
       skills: [
@@ -68,6 +59,7 @@ const Skills = () => {
         { icon: <SiPostman size={60} color="#FF6C37" />, label: 'Postman' },
         { icon: <SiCanva size={60} color="#00C4CC" />, label: 'Canva' },
         { icon: <SiVercel size={60} color="#000000" />, label: 'Vercel' },
+        { icon: <SiJupyter size={60} color="#F37626" />, label: 'Jupyter Notebook' },  
         { icon: <FaCode size={60} color="#007ACC" />, label: 'VS Code' },
       ],
     },

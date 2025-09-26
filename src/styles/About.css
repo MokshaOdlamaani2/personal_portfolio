@@ -1,29 +1,28 @@
 /* General container */
 .about-container {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden; /* Prevent white space */
+  overflow-y: hidden;
   font-family: 'Georgia', serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  padding-top: 6rem; /* Space for navbar */
+  padding: 2rem 1rem;
+  padding-top: 6rem;
   box-sizing: border-box;
+  background-color: #f6f1de;
 }
 
-/* Curtain wrapper */
+/* Curtain background */
 .split-background {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   display: flex;
   z-index: 1;
 }
 
-/* Realistic velvet curtain */
 .split {
   flex: 1;
   background:
@@ -39,14 +38,13 @@
   box-shadow:
     inset -15px 0 25px rgba(0, 0, 0, 0.5),
     inset 15px 0 25px rgba(255, 255, 255, 0.05);
-  position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   animation-duration: 1.8s;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  position: relative;
 }
 
-/* Decorative folds */
 .split::before,
 .split::after {
   content: "";
@@ -55,9 +53,9 @@
   bottom: 0;
   width: 30px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 20%, transparent 70%);
-  pointer-events: none;
   z-index: 2;
   filter: blur(2px);
+  pointer-events: none;
 }
 
 .split::before {
@@ -65,54 +63,39 @@
   transform: translateX(5px) rotate(5deg);
 }
 
-
 .split::after {
   right: 5px;
   transform: translateX(-5px) rotate(-5deg);
 }
 
-/* Left curtain opens left */
 .split.left {
   animation-name: splitOpenLeft;
 }
 
-/* Right curtain opens right */
 .split.right {
   animation-name: splitOpenRight;
 }
 
 @keyframes splitOpenLeft {
-  0% {
-    transform: translateX(0);
-  }
-  80% {
-    transform: translateX(-95%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0); }
+  80% { transform: translateX(-95%); }
+  100% { transform: translateX(-100%); }
 }
 
 @keyframes splitOpenRight {
-  0% {
-    transform: translateX(0);
-  }
-  80% {
-    transform: translateX(95%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(0); }
+  80% { transform: translateX(95%); }
+  100% { transform: translateX(100%); }
 }
 
-/* About content card */
+/* Content card */
 .about-content {
   position: relative;
   z-index: 2;
-  max-width: 850px;
+  max-width: 1100px;
   width: 100%;
   background-color: #f8eccf;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 0 20px rgba(39, 84, 138, 0.7);
   padding: 2rem;
   display: flex;
@@ -121,6 +104,7 @@
   transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
   pointer-events: none;
+  flex-wrap: wrap;
 }
 
 .about-content.reveal {
@@ -129,17 +113,21 @@
   pointer-events: auto;
 }
 
-/* Image */
+/* Image styles */
 .about-image {
-  flex-shrink: 0;
+  flex: 1 1 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-img {
   border-radius: 12px;
   object-fit: cover;
-  width: 12rem;
-  height: 12rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 250px;
+  aspect-ratio: 1/1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -147,9 +135,9 @@
   transform: scale(1.05);
 }
 
-/* Text */
+/* Text section */
 .about-text {
-  flex: 1;
+  flex: 2 1 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -157,15 +145,65 @@
 }
 
 .about-text h1 {
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   margin-bottom: 1rem;
   color: #4B352A;
   letter-spacing: 0.05em;
 }
 
 .about-text p {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   line-height: 1.6;
   margin-bottom: 1rem;
   color: #160505;
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1.5rem 1rem;
+    padding-top: 5rem;
+  }
+
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .profile-img {
+    max-width: 160px;
+    margin-bottom: 1rem;
+  }
+
+  .about-text p {
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 1rem 0.5rem;
+    padding-top: 4.5rem;
+  }
+
+  .about-content {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .profile-img {
+    max-width: 140px;
+  }
+
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .about-text h1 {
+    font-size: 1.5rem;
+  }
 }
