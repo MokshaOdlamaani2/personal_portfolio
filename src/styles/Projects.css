@@ -1,0 +1,200 @@
+/* === Container === */
+.projects-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #2B0B2E; /* dark purple bg */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem 2rem 4rem; /* Top padding for fixed navbar */
+  color: #F9F5E3; /* pale warm text */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* === Section Title === */
+.projects-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  letter-spacing: 1px;
+  color: #4B352A; /* warm gold */
+  opacity: 0;
+  animation: popIn 0.8s ease-out forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+/* === Grid Layout === */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* === Project Card === */
+.project-card {
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeSlideIn 0.8s forwards;
+  animation-delay: var(--delay, 0s);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Card Content === */
+.project-card h2 {
+  font-size: 1.4rem;
+  color: #CA7842;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.project-card p {
+  font-size: 1rem;
+  color: #4B352A;
+  text-align: center;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+/* === Thumbnail with Overlay === */
+.thumbnail-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/6; /* shorter */
+  overflow: hidden;
+}
+
+.thumbnail-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail-container:hover img {
+  transform: scale(1.05);
+}
+
+.view-video-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(202, 120, 66, 0.85);
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  border-radius: 30px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.thumbnail-container:hover .view-video-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === Button Section === */
+.project-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.project-buttons .btn {
+  padding: 0.5rem 1.2rem;
+  background-color: #CA7842;
+  color: #fff;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.project-buttons .btn:hover {
+  background-color: #b36631;
+}
+
+/* === Hover Effect on Card === */
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* === Modal for Demo Video === */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 800px;
+  width: 90%;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #444;
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 8px;
+}
