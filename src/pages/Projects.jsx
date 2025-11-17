@@ -90,7 +90,7 @@ const Projects = () => {
         "A full-stack MERN application to manage employee records with role-based access. Features include employee CRUD operations, search/filter, CSV export, JWT authentication, and a responsive dashboard.",
       link: "https://your-live-demo-link.com",
       source: "https://github.com/MokshaOdlamaani2/PRODIGY_WD_02.git",
-      demo: "https://youtu.be/T6ZhmAu9qc0?si=KqONBC3w3PYtN2nC",
+      demo: "https://youtu.be/OcM_wiVpJ-Q?si=XG-yKn02pokXHNc6",
       thumbnail: emsThumbnail,
     },
     {
