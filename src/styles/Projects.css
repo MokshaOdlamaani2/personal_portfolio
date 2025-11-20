@@ -1,223 +1,295 @@
-/* Reset default body and html margin/padding */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden; /* prevent horizontal scroll */
-}
+/* ================================================
+   PROJECTS SECTION — CLEAN, MODERN, ANIMATED
+   Palette uses: var(--background), var(--text), var(--primary)
+================================================ */
 
-/* === Container === */
+/* Wrapper */
 .projects-container {
-  width: 100vw;           /* full viewport width */
+  width: 100%;
   min-height: 100vh;
-  background-color: #2B0B2E; /* dark purple bg */
+  padding: 6rem 1.2rem 4rem;
+  background: var(--background);
+  color: var(--text);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6rem 1rem 4rem;  /* horizontal padding reduced */
-  color: #F9F5E3;
-  overflow: hidden;
-  box-sizing: border-box;
-  margin: 0;              /* remove margins */
-  max-width: none;        /* disable max-width */
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .projects-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .projects-container {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-}
-
-/* === Section Title === */
+/* Main Title */
 .projects-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
   font-weight: 700;
-  margin: 2rem 0 3rem;
-  letter-spacing: 1px;
-  color: #4B352A;
+  color: var(--primary);
+  margin-bottom: 3rem;
   opacity: 0;
-  animation: popIn 0.8s ease-out forwards;
+  animation: titlePop 1s ease forwards;
 }
 
-@keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+@keyframes titlePop {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.03); }
+  100% { transform: translateY(0) scale(1); }
 }
 
-/* === Grid Layout === */
+/* Section Title */
+.section-title {
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 4px;
+  background: var(--primary);
+  animation: underline 1s ease forwards;
+}
+
+@keyframes underline {
+  to { width: 100%; }
+}
+
+/* Grid Layout */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
   width: 100%;
   max-width: 1200px;
+  display: grid;
+  gap: 2.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-/* === Project Card === */
+/* Project Card */
 .project-card {
-  background: #fff;
-  border-radius: 1rem;
+  background: #ffffff;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  border: 2.5px solid var(--primary);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+
   transform: translateY(20px);
   opacity: 0;
-  animation: fadeSlideIn 0.8s forwards;
-  animation-delay: var(--delay, 0s);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+  animation: cardFadeIn 0.9s forwards, floatCard 5s ease-in-out infinite;
+  animation-delay: var(--delay);
+  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
-@keyframes fadeSlideIn {
+@keyframes cardFadeIn {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* === Card Content === */
-.project-card h2 {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  color: #CA7842;
-  margin: 1rem 0 0.5rem;
-  text-align: center;
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
-.project-card p {
-  font-size: clamp(0.9rem, 2.3vw, 1rem);
-  color: #4B352A;
-  text-align: center;
-  padding: 0 1rem;
-  margin-bottom: 1rem;
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-/* === Thumbnail with Overlay === */
+/* Thumbnail */
 .thumbnail-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 6; /* wide thumbnails */
+  aspect-ratio: 16/9;
   overflow: hidden;
+  perspective: 1000px;
 }
 
 .thumbnail-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.45s ease, filter 0.4s ease;
 }
 
-.thumbnail-container:hover img {
-  transform: scale(1.05);
+.project-card:hover .thumbnail-container img {
+  transform: scale(1.10) rotate3d(1, 1, 0, 8deg);
+  filter: brightness(1.15);
 }
 
-.view-video-btn {
+/* Video Overlay */
+.video-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(202, 120, 66, 0.85);
-  color: #fff;
-  padding: 0.6rem 1.4rem;
-  font-weight: 600;
-  border-radius: 30px;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
   pointer-events: none;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
+  z-index: 2;
 }
 
-.thumbnail-container:hover .view-video-btn {
+.project-card:hover .video-overlay {
   opacity: 1;
-  pointer-events: auto;
 }
 
-/* === Button Section === */
+.video-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  animation: pulse 1.3s infinite ease-in-out;
+}
+
+.video-text {
+  margin-top: 0.3rem;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+
+/* Card Content */
+.project-card h2 {
+  text-align: center;
+  margin: 1rem 1rem 0.5rem;
+  color: var(--primary);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.project-card p {
+  text-align: justify;
+  padding: 0 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* Tech Stack */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tech-badge {
+  background: var(--primary);
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+
+.tech-badge:hover {
+  transform: scale(1.1);
+  background: #b36631;
+}
+
+/* Buttons */
 .project-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
 }
 
-.project-buttons .btn {
+.btn {
   padding: 0.5rem 1.2rem;
-  background-color: #CA7842;
-  color: #fff;
-  border-radius: 0.5rem;
-  text-decoration: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 8px;
   font-weight: 500;
-  transition: background-color 0.3s ease;
-  white-space: nowrap;
-  font-size: 1rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease;
 }
 
-.project-buttons .btn:hover {
-  background-color: #b36631;
+.btn:hover {
+  transform: translateY(-2px);
 }
 
-/* === Hover Effect on Card === */
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+.btn:active {
+  transform: scale(0.92);
 }
 
-/* === Modal for Demo Video === */
+/* Ripple Effect */
+.btn::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(22);
+    opacity: 0;
+  }
+}
+
+/* Modal */
 .modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.75);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 9999;
+  align-items: center;
+  z-index: 99999;
+  animation: fadeBg 0.3s ease forwards;
+}
+
+@keyframes fadeBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-content {
-  background: #fff;
-  border-radius: 10px;
-  max-width: 800px;
+  background: white;
   width: 90%;
+  max-width: 800px;
+  border-radius: 12px;
   padding: 1.5rem;
   position: relative;
+  animation: zoomIn 0.35s ease forwards;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+@keyframes zoomIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .modal-close {
   position: absolute;
   top: 10px;
-  right: 12px;
-  background: transparent;
-  border: none;
+  right: 14px;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #444;
-}
-
-.modal-close:focus {
-  outline: 2px dashed #CA7842;
-  outline-offset: 3px;
+  color: var(--text);
 }
 
 .modal-content iframe {
@@ -227,34 +299,10 @@ html, body {
   border-radius: 8px;
 }
 
-/* =================== */
-/* Responsive Breakpoints */
-/* =================== */
-
-@media (max-width: 992px) {
-  .projects-title {
-    font-size: clamp(2rem, 4.5vw, 2.8rem);
-  }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-  .projects-container {
-    padding: 5rem 1.5rem 3rem;
-  }
-
-  .projects-title {
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    margin-bottom: 2rem;
-  }
-
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    max-width: 600px;
-  }
-
-  .thumbnail-container {
-    aspect-ratio: 16 / 9;
   }
 
   .modal-content iframe {
@@ -263,24 +311,15 @@ html, body {
 }
 
 @media (max-width: 480px) {
-  .projects-container {
-    padding: 4rem 1rem 2rem;
-  }
-
-  .projects-title {
-    font-size: clamp(1.6rem, 5vw, 2rem);
-    margin-bottom: 1.5rem;
-  }
-
   .thumbnail-container {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4/3;
   }
 
   .modal-content iframe {
     height: min(200px, 45vh);
   }
 
-  .project-buttons .btn {
+  .btn {
     padding: 0.4rem 1rem;
     font-size: 0.9rem;
   }

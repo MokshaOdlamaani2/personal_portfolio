@@ -14,3 +14,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+:root {
+  --background: #FFF7E8;   /* Light Ivory */
+  --text: #4B352A;         /* Rich Brown */
+  --primary: #CA7842;      /* Terracotta */
+  --purple: #4B1C51;       /* Optional: hero gradient */
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FiMenu, FiX } from 'react-icons/fi'; // Hamburger icons
+import { FiMenu, FiX } from 'react-icons/fi';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,12 +22,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 md:py-4">
         <div className="text-2xl font-bold text-[#F0F2BD] font-serif">Portfolio</div>
 
-        {/* Mobile toggle */}
         <div className="md:hidden text-[#F0F2BD] text-2xl cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FiX /> : <FiMenu />}
         </div>
 
-        {/* Links - Desktop */}
         <div className="hidden md:flex space-x-6">
           {routes.map(({ path, name }) => (
             <NavLink
@@ -44,7 +42,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Links - Mobile dropdown */}
       {isOpen && (
         <div className="flex flex-col items-center space-y-3 pb-4 md:hidden">
           {routes.map(({ path, name }) => (
@@ -52,7 +49,7 @@ const Navbar = () => {
               key={path}
               to={path}
               end={path === "/"}
-              onClick={() => setIsOpen(false)} // Close menu on click
+              onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
                 `${baseClass} w-full text-center ${isActive ? activeClass : inactiveClass}`
               }

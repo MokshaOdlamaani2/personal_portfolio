@@ -1,27 +1,65 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "../styles/home.css";
+
+import About from "./About";
+import Skills from "./Skills";
+import Projects from "./Projects";
+import Contact from "./Contact";
 
 const Home = () => {
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    let lastScroll = window.scrollY;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const currentScroll = window.scrollY;
+          const scrollingDown = currentScroll > lastScroll;
+          lastScroll = currentScroll;
+
+          const el = entry.target;
+
+          // Reset all transition classes
+          el.classList.remove(
+            "section-enter-top",
+            "section-enter-bottom",
+            "section-exit-up",
+            "section-exit-down"
+          );
+
+          if (entry.isIntersecting) {
+            // Enter animations
+            if (scrollingDown) el.classList.add("section-enter-bottom");
+            else el.classList.add("section-enter-top");
+          } else {
+            // Exit animations
+            if (scrollingDown) el.classList.add("section-exit-up");
+            else el.classList.add("section-exit-down");
+          }
+        });
+      },
+      { threshold: 0.6 } // trigger when 60% visible
+    );
+
+    sections.forEach((sec) => observer.observe(sec));
+  }, []);
+
   return (
-    <div
-      className="flex flex-col items-center justify-center min-h-screen bg-[#F6F1DE] text-[#4B352A] text-center"
-      style={{ fontFamily: "'Playfair Display', serif", paddingTop: "8rem" }} // more space for the navbar!
-    >
-      <p className="text-2xl md:text-4xl mb-4">Hi, I'm</p>
+    <div className="home-container">
+      <section className="hero-section">
+        <h1 className="hero-title">
+          Hi, I AM <span className="hero-name">Moksha Odlamaani</span>
+        </h1>
+        <div className="scroll-down">
+          <span className="arrow">⌄</span>
+        </div>
+      </section>
 
-
-      <h1
-        className="text-6xl md:text-8xl font-extrabold mb-10 select-none bg-gradient-to-r from-[#00879E] to-[#4F1C51] text-transparent bg-clip-text"
-      >
-        Moksha Odlamaani
-      </h1>
-
-     <a
-  href="/about"
-  className="mt-6 mb-12 text-[#CA7842] text-2xl font-semibold hover:underline transition duration-200 ease-in-out"
->
-  About Me
-</a>
-
+      <About />
+      <Skills />
+      <Projects />
+      <Contact />
     </div>
   );
 };
