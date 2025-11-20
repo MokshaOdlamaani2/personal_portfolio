@@ -8,12 +8,19 @@ const Skills = () => {
   const [showSkills, setShowSkills] = useState(false);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setShowTitle(false), 2000);
-    const timer2 = setTimeout(() => setShowSkills(true), 2200);
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      setShowTitle(false);
+      setShowSkills(true); // show skills immediately on mobile
+    } else {
+      const timer1 = setTimeout(() => setShowTitle(false), 2000);
+      const timer2 = setTimeout(() => setShowSkills(true), 2200);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
+    }
   }, []);
 
   const skillCategories = [
@@ -59,8 +66,7 @@ const Skills = () => {
   ];
 
   return (
-   <section className="skills-container">
-      {/* Top title */}
+    <section className="skills-container">
       <h1 className="skills-main-title">🛠️ Technical Skills</h1>
 
       {showSkills && (
@@ -84,7 +90,7 @@ const Skills = () => {
           ))}
         </div>
       )}
-   </section>
+    </section>
   );
 };
 

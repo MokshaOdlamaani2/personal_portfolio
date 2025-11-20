@@ -28,16 +28,16 @@
 .all-skills-row {
   display: grid;
   width: 100%;
-  max-width: 1400px; /* wider container */
+  max-width: 1400px;
   gap: 2rem;
   justify-items: center;
-  grid-template-columns: repeat(4, 1fr); /* 4 boxes per row on desktop */
+  grid-template-columns: repeat(4, 1fr);
 }
 
 /* Individual Category Box */
 .skills-section {
   width: 100%;
-  max-width: 320px; /* box width */
+  max-width: 320px;
   background: #fff4e0;
   border-radius: 18px;
   padding: 2rem 1.5rem;
@@ -59,7 +59,7 @@
 /* Skills Grid inside each box */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 icons per row on desktop */
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
   justify-items: center;
   width: 100%;
@@ -133,50 +133,27 @@
 
 /* Tablet (1024px) — 2 boxes per row */
 @media (max-width: 1024px) {
-  .all-skills-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-  .skills-section {
-    max-width: 350px;
-  }
+  .all-skills-row { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .skills-section { max-width: 350px; }
 }
 
-/* Tablet (768px) — adjust icon size */
+/* Tablet (768px) — auto-fit boxes */
 @media (max-width: 768px) {
-  .all-skills-row {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
+  .all-skills-row { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
   .skills-section {
+    opacity: 1; /* always visible on mobile */
+    transform: translateY(0) scale(1);
     padding: 1.5rem;
+    animation: none;
   }
-  .skill-item svg {
-    width: clamp(60px, 14vw, 95px);
-    height: clamp(60px, 14vw, 95px);
-  }
+  .skill-item svg { width: clamp(60px, 14vw, 95px); height: clamp(60px, 14vw, 95px); }
 }
 
-/* Mobile (480px) — 1 box per row, 1 icon per row inside */
+/* Mobile (480px) — 1 box per row */
 @media (max-width: 480px) {
-  .all-skills-row {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .skills-section {
-    max-width: 90%;
-    padding: 1.3rem;
-  }
-  .skills-grid {
-    grid-template-columns: 1fr; /* 1 icon per row */
-    gap: 15px;
-  }
-  .skill-item svg {
-    width: clamp(60px, 26vw, 85px);
-    height: clamp(60px, 26vw, 85px);
-    padding: 10px;
-  }
-  .skills-main-title {
-    font-size: clamp(2rem, 8vw, 2.5rem);
-  }
+  .all-skills-row { grid-template-columns: 1fr; gap: 1.5rem; }
+  .skills-section { max-width: 90%; padding: 1.3rem; }
+  .skills-grid { grid-template-columns: 1fr; gap: 15px; }
+  .skill-item svg { width: clamp(60px, 26vw, 85px); height: clamp(60px, 26vw, 85px); padding: 10px; }
+  .skills-main-title { font-size: clamp(2rem, 8vw, 2.5rem); }
 }

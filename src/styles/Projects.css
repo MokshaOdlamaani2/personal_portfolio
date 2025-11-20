@@ -267,22 +267,83 @@
   to { opacity: 1; }
 }
 
+/* Modal iframe wrapper */
 .modal-content {
   background: white;
   width: 90%;
   max-width: 800px;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem;
   position: relative;
   animation: zoomIn 0.35s ease forwards;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  overflow: hidden;
 }
 
-@keyframes zoomIn {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
+/* Rotating conic-gradient border */
+.modal-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: conic-gradient(
+    #ff9a9e,
+    #fad0c4,
+    #a18cd1,
+    #fbc2eb,
+    #ff9a9e
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: rotateBorder 4s linear infinite;
+  pointer-events: none;
+  z-index: 2;
 }
 
+/* Spark particles */
+.modal-content .spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 6px 2px white;
+  animation: sparkMove linear infinite;
+  pointer-events: none;
+}
+
+/* Animate sparks along border path */
+@keyframes sparkMove {
+  0% { transform: rotate(0deg) translate(360px) rotate(0deg); opacity: 1; }
+  100% { transform: rotate(360deg) translate(360px) rotate(-360deg); opacity: 0; }
+}
+
+/* Animate rotation of border */
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Iframe inside modal */
+.modal-content iframe {
+  width: 100%;
+  height: min(400px, 50vh);
+  border: 3px solid transparent;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Modal close button */
 .modal-close {
   position: absolute;
   top: 10px;
@@ -290,37 +351,24 @@
   font-size: 1.8rem;
   cursor: pointer;
   color: var(--text);
+  z-index: 3;
 }
 
-.modal-content iframe {
-  width: 100%;
-  height: min(400px, 50vh);
-  border: none;
-  border-radius: 8px;
+/* Zoom animation */
+@keyframes zoomIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
   .modal-content iframe {
     height: min(250px, 45vh);
   }
 }
 
 @media (max-width: 480px) {
-  .thumbnail-container {
-    aspect-ratio: 4/3;
-  }
-
   .modal-content iframe {
     height: min(200px, 45vh);
-  }
-
-  .btn {
-    padding: 0.4rem 1rem;
-    font-size: 0.9rem;
   }
 }
